@@ -3,7 +3,7 @@ external_delay: 1
 internal_delay: 5
 http:
   port: "8083"
-  host: "127.0.0.1"
+  host: "localhost"
 postgres:
   port: "5432"
   host: "localhost"
