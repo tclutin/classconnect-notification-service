@@ -11,4 +11,4 @@ postgres:
   password: "root"
   db_name: "postgres"
 telegram:
-  bot_token: "6620119138:AAHLn6MpNi30KGl0oxdwwR_DtoWOJVWv8ls"
+  bot_token: "<your bot token>"

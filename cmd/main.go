@@ -8,6 +8,7 @@ import (
 	"classconnect-notification-service/pkg/client/postgresql"
 	"classconnect-notification-service/pkg/client/telegram"
 	"classconnect-notification-service/pkg/logging"
+	"classconnect-notification-service/pkg/utils"
 	"context"
 	"fmt"
 	"log/slog"
@@ -57,7 +58,7 @@ func main() {
 		select {
 		case <-ticker.C:
 			currentTime := time.Now()
-			subjects, err := scheduleRepository.GetSubjectsWithDetail(context.TODO(), 6, true, currentTime)
+			subjects, err := scheduleRepository.GetSubjectsWithDetail(context.TODO(), utils.GetDayOfWeek(), utils.IsEvenWeek(), currentTime)
 			if err != nil {
 				slog.Error("an error occurred while receiving the data", slog.Any("error", err))
 				continue
