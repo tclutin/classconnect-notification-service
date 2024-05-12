@@ -3,7 +3,7 @@ external_delay: 1
 internal_delay: 5
 http:
   port: "8083"
-  host: "127.0.0.1"
+  host: "localhost"
 postgres:
   port: "5432"
   host: "localhost"
@@ -11,4 +11,4 @@ postgres:
   password: "root"
   db_name: "postgres"
 telegram:
-  bot_token: "<your bot token>"
+  bot_token: "6620119138:AAHLn6MpNi30KGl0oxdwwR_DtoWOJVWv8ls"
