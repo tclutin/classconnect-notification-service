@@ -58,7 +58,7 @@ func main() {
 		select {
 		case <-ticker.C:
 			currentTime := time.Now()
-			subjects, err := scheduleRepository.GetSubjectsWithDetail(context.TODO(), 1, utils.IsEvenWeek(), currentTime)
+			subjects, err := scheduleRepository.GetSubjectsWithDetail(context.TODO(), utils.GetDayOfWeek(), utils.IsEvenWeek(), currentTime)
 			if err != nil {
 				slog.Error("an error occurred while receiving the data", slog.Any("error", err))
 				continue
