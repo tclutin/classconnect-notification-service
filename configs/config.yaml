@@ -1,0 +1,14 @@
+env: "dev"
+external_delay: 1
+internal_delay: 5
+http:
+  port: "8081"
+  host: "127.0.0.1"
+postgres:
+  port: "5432"
+  host: "localhost"
+  user: "postgres"
+  password: "root"
+  db_name: "postgres"
+telegram:
+  bot_token: "<your bot token>"
