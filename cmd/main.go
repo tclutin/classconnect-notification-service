@@ -58,14 +58,19 @@ func main() {
 		select {
 		case <-ticker.C:
 			currentTime := time.Now()
-			subjects, err := scheduleRepository.GetSubjectsWithDetail(context.TODO(), utils.GetDayOfWeek(), utils.IsEvenWeek(), currentTime)
+			subjects, err := scheduleRepository.GetSubjectsWithDetail(context.TODO(), 1, utils.IsEvenWeek(), currentTime)
 			if err != nil {
 				slog.Error("an error occurred while receiving the data", slog.Any("error", err))
 				continue
 			}
 			for _, subject := range subjects {
 				if !memoryStorage.Get(*subject.ChatID) {
-					message := fmt.Sprintf("Subject: %s Teacher: %s Room: %s Start Time: %s", subject.Name, subject.Teacher, subject.Cabinet, subject.StartTime)
+					remainedTime, err := utils.GetDifferentTimeRFFC822(subject.StartTime)
+					if err != nil {
+						slog.Error("an error occurred while parsing the date", slog.Any("error", err))
+					}
+
+					message := fmt.Sprintf("✅ Notification ✅\n\n📖 Subject: %s\n📍 Location: %s\n👨‍🏫 Teacher: %s\n⏰ Time: %s - %s\n⏳ Time Until: %d minutes", subject.Name, subject.Cabinet, subject.Teacher, subject.StartTime, subject.EndTime, remainedTime)
 					notificationService.Send(*subject.ChatID, message)
 					memoryStorage.Set(*subject.ChatID, true)
 				}

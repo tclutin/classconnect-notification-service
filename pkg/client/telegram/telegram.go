@@ -3,6 +3,7 @@ package telegram
 import (
 	"fmt"
 	"net/http"
+	url2 "net/url"
 )
 
 type Client interface {
@@ -22,7 +23,7 @@ func NewClient(token string) *Telegram {
 }
 
 func (t *Telegram) Send(chatId uint64, message string) error {
-	url := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%v&text=%s", t.Token, chatId, message)
+	url := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%v&text=%s", t.Token, chatId, url2.QueryEscape(message))
 
 	resp, err := t.httpClient.Post(url, "", nil)
 	if err != nil {
